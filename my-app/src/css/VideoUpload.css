@@ -1,0 +1,27 @@
+/* Container for the upload section */
+.upload-container {
+    position: fixed; /* Fixes the upload section to the top */
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #f8f9fa66; /* Light background color */
+    padding: 20px; /* Space around the content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    z-index: 10; /* Ensure it is above other content */
+    height: 80px; /* Explicit height to prevent overlap issues */
+  }
+  .upload-container input {
+  }
+  /* Main content area */
+  .content {
+    margin-top: 120px; /* Space for the fixed upload section plus padding */
+    padding: 20px; /* Space around the content */
+    height: calc(100vh - 120px); /* Fill the rest of the viewport */
+    overflow-y: auto; /* Add vertical scroll for content overflow */
+  }
+  
+  /* Video display area */
+  .video-list {
+    margin-top: 20px; /* Space between uploads */
+  }
+  

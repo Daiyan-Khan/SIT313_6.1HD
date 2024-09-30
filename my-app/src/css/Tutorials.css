@@ -1,0 +1,73 @@
+/* Tutorials.css */
+
+.tutorials-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent overflow on the entire page */
+  padding: 20px;
+}
+
+.home-button{
+  position: fixed;
+  top:120px;
+}
+
+.upload-section {
+  position: sticky; /* Makes the upload section stick to the top */
+  top: 0; /* Stick at the top */
+  z-index: 100; /* Ensure it stays on top of other elements */
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Space below the upload section */
+  display: flex; /* Flexbox for layout */
+  flex-direction: column; /* Stack items vertically */
+}
+
+.upload-section button{
+  position: fixed;
+  left: 10px;
+  z-index: 200;
+}
+
+.home-button {
+  margin-bottom: 10px; /* Space between Home button and upload area */
+  padding: 8px 12px; /* Padding for the button */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  right:10px;
+}
+
+.videos-list {
+  margin-top:200px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-grow: 1; /* Allow the video list to grow and take up the remaining space */
+  overflow-y: auto; /* Enable vertical scrolling for videos */
+  padding: 10px;
+}
+
+.video-card {
+  flex: 1 1 calc(30% - 10px);
+  background-color: white; /* Add background color for contrast */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+  max-height: 300px; /* Limit the height of video cards */
+  overflow: hidden; /* Prevent overflow in the video cards */
+}
+
+.video-card video {
+  width: 100%;
+  height: auto;
+  max-height: 120px; /* Restrict the size of the video */
+}
+
+.video-card h3 {
+  font-size: 1em; /* Make title font smaller */
+  margin-bottom: 5px;
+}

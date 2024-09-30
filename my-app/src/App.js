@@ -7,6 +7,8 @@ import PostPage from './routes/PostPage'; // Post page component
 import FindQuestion from './routes/FindQuestion';
 import './css/App.css'
 import Tutorials from './routes/Tutorials';
+import VideoDetails from './VideoDetails';
+import ArticlesPage from './routes/ArticlesPage';
 const App = () => {
     return (
         // Router setup for managing client-side routing in the app
@@ -25,6 +27,8 @@ const App = () => {
                 <Route path="/post" element={<PostPage />} />
                 <Route path="/find-question" element={<FindQuestion />} />
                 <Route path="/tutorials" element={<Tutorials />} />
+                <Route path="/video/:videoId" element={<VideoDetails />} /> {/* Detailed video page */}
+                <Route path="/articles-page" element={<ArticlesPage />} />
             </Routes>
         </Router>
     );

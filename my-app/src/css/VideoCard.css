@@ -1,0 +1,32 @@
+/* video card container */
+.video-card {
+    border: 1px solid #ccc; /* Add a border around each card */
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px; /* Space inside the card */
+    margin-bottom: 20px; /* Space between cards */
+    max-width: 400px; /* Limit the width of each card */
+    height: 400px;
+    background-color: #f9f9f9; /* Light background for the card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  /* style the video element */
+  .video-card video {
+    width: 100%; /* Make the video fill the card’s width */
+    height: 150px; /* Keep the aspect ratio of the video */
+    max-height: 250px; /* Limit the video height */
+    border-radius: 8px; /* Rounded corners for the video */
+    object-fit: cover; /* Ensure the video fits within the given area */
+  }
+  
+  .video-card h3 {
+    margin: 10px 0; /* Add spacing above and below the title */
+    font-size: 1.2rem;
+  }
+  
+  .video-card p {
+    margin: 5px 0; /* Small spacing for paragraphs */
+    font-size: 0.9rem;
+    color: #555; /* Slightly lighter text color */
+  }
+  

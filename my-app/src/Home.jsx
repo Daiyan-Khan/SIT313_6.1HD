@@ -17,7 +17,6 @@ import './css/Home.css'; // Styles specific to the Home component
  */
 const Home = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track user login status
-    const [tutorialVideos, setTutorialVideos] = useState([]); // State to hold uploaded videos
     const navigate = useNavigate(); // Hook for programmatic navigation
 
     // Check if user is logged in when component mounts
@@ -26,21 +25,7 @@ const Home = () => {
         if (token) {
             setIsLoggedIn(true); // Update state if token exists
         }
-        // Fetch existing tutorial videos (this would be your API call)
-        fetchTutorialVideos();
     }, []);
-
-    // Function to fetch tutorial videos from backend
-    const fetchTutorialVideos = async () => {
-        // Assuming you have an API endpoint that returns tutorial videos
-        try {
-            const response = await fetch('/api/tutorials'); // Replace with your actual endpoint
-            const data = await response.json();
-            setTutorialVideos(data); // Set the state with fetched data
-        } catch (error) {
-            console.error('Error fetching tutorial videos:', error);
-        }
-    };
 
     // Handle user logout functionality
     const handleLogout = () => {
@@ -109,21 +94,34 @@ const Home = () => {
                     rating="4.5" 
                 />
             </div>
-            <Button text="See all articles" /> {/* Button to navigate to all articles */}
+            <Link to="/articles-page"> {/* Link to the Articles page */}
+                <Button text="See all articles" />
+            </Link>
 
             {/* Featured Tutorials Section */}
             <h1 className="TutorialHeadline">Featured Tutorials</h1>
             <div className="TutorialSection">
-                {tutorialVideos.map(video => (
-                    <Card 
-                        key={video.id}
-                        image={video.thumbnail || require('./images/Deakin.avif')} // Assuming you have a thumbnail field
-                        title={video.title} 
-                        description={video.description} 
-                        author={video.author} 
-                        rating={video.rating} 
-                    />
-                ))}
+                <Card 
+                    image={require('./images/React.avif')} // Use the same image as articles
+                    title="Tutorial 1" 
+                    description="Description for Tutorial 1." 
+                    author="Author A" 
+                    rating="4.5" 
+                />
+                <Card 
+                    image={require('./images/React.avif')} // Use the same image as articles
+                    title="Tutorial 2" 
+                    description="Description for Tutorial 2." 
+                    author="Author B" 
+                    rating="4.0" 
+                />
+                <Card 
+                    image={require('./images/React.avif')} // Use the same image as articles
+                    title="Tutorial 3" 
+                    description="Description for Tutorial 3." 
+                    author="Author C" 
+                    rating="4.8" 
+                />
             </div>
             <Button text="See all tutorials" onClick={() => navigate('/tutorials')} /> {/* Button to navigate to all tutorials */}
 
@@ -145,4 +143,3 @@ const Home = () => {
 };
 
 export default Home;
- 

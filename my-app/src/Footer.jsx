@@ -14,9 +14,9 @@ const Footer = () => {
                     <h4>Explore</h4>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/">Questions</a></li>
-                        <li><a href="/">Articles</a></li>
-                        <li><a href="/">Tutorials</a></li>
+                        <li><a href="/find-question">Questions</a></li>
+                        <li><a href="/articles-page">Articles</a></li>
+                        <li><a href="/tutorials">Tutorials</a></li>
                     </ul>
                 </div>
 
@@ -25,7 +25,7 @@ const Footer = () => {
                     <h4>Support</h4>
                     <ul>
                         <li><a href="/">FAQs</a></li>
-                        <li><a href="/">Help</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Help</a></li>
                         <li><a href="/">Contact Us</a></li>
                     </ul>
                 </div>
