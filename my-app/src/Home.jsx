@@ -6,6 +6,7 @@ import Button from './Button'; // Reusable button component
 import Footer from './Footer'; // Reusable footer component
 import Subscribe from './Subscribe'; // Reusable sign-up component
 import Chat from './Chat'; // Import the Chat component
+import VideoUpload from './VideoUpload'; // Import the Video Upload component
 import './css/Home.css'; // Styles specific to the Home component
 
 /**
@@ -16,6 +17,7 @@ import './css/Home.css'; // Styles specific to the Home component
  */
 const Home = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track user login status
+    const [tutorialVideos, setTutorialVideos] = useState([]); // State to hold uploaded videos
     const navigate = useNavigate(); // Hook for programmatic navigation
 
     // Check if user is logged in when component mounts
@@ -24,7 +26,21 @@ const Home = () => {
         if (token) {
             setIsLoggedIn(true); // Update state if token exists
         }
+        // Fetch existing tutorial videos (this would be your API call)
+        fetchTutorialVideos();
     }, []);
+
+    // Function to fetch tutorial videos from backend
+    const fetchTutorialVideos = async () => {
+        // Assuming you have an API endpoint that returns tutorial videos
+        try {
+            const response = await fetch('/api/tutorials'); // Replace with your actual endpoint
+            const data = await response.json();
+            setTutorialVideos(data); // Set the state with fetched data
+        } catch (error) {
+            console.error('Error fetching tutorial videos:', error);
+        }
+    };
 
     // Handle user logout functionality
     const handleLogout = () => {
@@ -45,15 +61,14 @@ const Home = () => {
             {/* Welcome and Search Section */}
             <h1>Welcome to the Home Page</h1>
             <Link to="/find-question" className="nav-link">
-            <button type="button">Find Question</button></Link> 
+                <button type="button">Find Question</button>
+            </Link> 
             <div className="search-bar">
-            
                 <p>Dev@DEAKIN</p>
                 <input type="text" placeholder="Search..." />
-                {/* Conditional rendering for post button or sign-up prompt */}
-                    <Link to='/post'>
-                        <button type="button">Post</button> {/* Button to navigate to post page */}
-                    </Link>
+                <Link to='/post'>
+                    <button type="button">Post</button> {/* Button to navigate to post page */}
+                </Link>
             </div>
 
             {/* Actions: Login/Logout Button */}
@@ -99,33 +114,25 @@ const Home = () => {
             {/* Featured Tutorials Section */}
             <h1 className="TutorialHeadline">Featured Tutorials</h1>
             <div className="TutorialSection">
-                <Card 
-                    image={require('./images/Deakin.avif')}
-                    title="Tutorial 1" 
-                    description="Description for Tutorial 1." 
-                    author="Author 1" 
-                    rating="4.7" 
-                />
-                <Card 
-                    image={require('./images/Deakin.avif')}
-                    title="Tutorial 2" 
-                    description="Description for Tutorial 2." 
-                    author="Author 2" 
-                    rating="3.8" 
-                />
-                <Card 
-                    image={require('./images/Deakin.avif')}
-                    title="Tutorial 3" 
-                    description="Description for Tutorial 3." 
-                    author="Author 3" 
-                    rating="4.5" 
-                />
+                {tutorialVideos.map(video => (
+                    <Card 
+                        key={video.id}
+                        image={video.thumbnail || require('./images/Deakin.avif')} // Assuming you have a thumbnail field
+                        title={video.title} 
+                        description={video.description} 
+                        author={video.author} 
+                        rating={video.rating} 
+                    />
+                ))}
             </div>
-            <Button text="See all tutorials" /> {/* Button to navigate to all tutorials */}
+            <Button text="See all tutorials" onClick={() => navigate('/tutorials')} /> {/* Button to navigate to all tutorials */}
+
+            {/* Upload Your Own Video Button */}
+            {isLoggedIn && <VideoUpload />} {/* Render the VideoUpload component if user is logged in */}
 
             <div className='subscribe'>
-            {/* SignUp Section */}
-            <Subscribe  /> {/* Render the sign-up component */}
+                {/* SignUp Section */}
+                <Subscribe  /> {/* Render the sign-up component */}
             </div>
 
             {/* Chat Component */}
@@ -138,3 +145,4 @@ const Home = () => {
 };
 
 export default Home;
+ 
