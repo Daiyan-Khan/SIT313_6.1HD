@@ -2,9 +2,8 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import { getAnalytics } from 'firebase/analytics';
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, addDoc,doc,getDoc,setDoc } from "firebase/firestore"; // Updated imports for Firestore
 import { getStorage } from 'firebase/storage';
-import axios from "axios";
 import bcrypt from "bcryptjs";
 
 // Your web app's Firebase configuration
@@ -22,10 +21,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
-const db = getFirestore();
+const db = getFirestore(app); // Initialize Firestore with the modular SDK
 const storage = getStorage(app);
 
 export { db, storage };
+
 // Google Auth Provider
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
@@ -58,6 +58,7 @@ export const signUpWithEmail = async (name, lastName, email, password) => {
         }
     }
 };
+
 export const checkUserInFirestore = async (uid) => {
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);
@@ -87,4 +88,19 @@ export const signInWithEmail = async (email, password) => {
                 throw new Error(error.message);
         }
     }
+};
+
+// Example functions for Firebase
+export const getVideoData = async () => {
+    const querySnapshot = await getDocs(collection(db, 'videos')); // Use Firestore's collection and getDocs
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+};
+
+export const saveVideoData = async (videoURL) => {
+    await addDoc(collection(db, 'videos'), { // Use Firestore's addDoc function
+        url: videoURL,
+        title: 'Your Video Title', // You might want to customize this
+        views: 0, // Initial view count
+        rating: 0, // Initial rating
+    });
 };

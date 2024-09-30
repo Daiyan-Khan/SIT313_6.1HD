@@ -6,6 +6,7 @@ import Signup from './routes/SignUp'; // Signup page component
 import PostPage from './routes/PostPage'; // Post page component
 import FindQuestion from './routes/FindQuestion';
 import './css/App.css'
+import Tutorials from './routes/Tutorials';
 const App = () => {
     return (
         // Router setup for managing client-side routing in the app
@@ -23,6 +24,7 @@ const App = () => {
                 {/* Route to post page (Only accessible when logged in, logic should be handled in Home or PostPage) */}
                 <Route path="/post" element={<PostPage />} />
                 <Route path="/find-question" element={<FindQuestion />} />
+                <Route path="/tutorials" element={<Tutorials />} />
             </Routes>
         </Router>
     );
