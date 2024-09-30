@@ -39,7 +39,7 @@ const TwoFactorAuth = ({ email, onSuccess }) => {
             console.log(response);
             
             // Handle plain text response
-            if (response.data.success) {
+            if (response.status === 200 && response.data.success) {
                 console.log('success');
                 onSuccess();
             } else {
