@@ -51,13 +51,9 @@ const Home = () => {
                 <p>Dev@DEAKIN</p>
                 <input type="text" placeholder="Search..." />
                 {/* Conditional rendering for post button or sign-up prompt */}
-                {isLoggedIn ? (
                     <Link to='/post'>
                         <button type="button">Post</button> {/* Button to navigate to post page */}
                     </Link>
-                ) : (
-                    <p>Sign up/Login to post</p> // Prompt for authentication
-                )}
             </div>
 
             {/* Actions: Login/Logout Button */}
