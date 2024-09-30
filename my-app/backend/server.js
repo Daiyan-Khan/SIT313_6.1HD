@@ -27,7 +27,12 @@ const transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASS, // Use environment variables for sensitive info
     },
 });
-
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with specific domain for production
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
 // Store user data temporarily for 2FA (consider a database for production)
 let userTwoFactorData = {};
 

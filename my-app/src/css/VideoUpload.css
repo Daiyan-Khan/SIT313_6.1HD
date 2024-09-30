@@ -1,0 +1,74 @@
+/* VideoUpload.css */
+
+/* Container for the upload form */
+.video-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 2px dashed #007bff;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.video-upload-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Input for video file */
+.video-upload-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.video-upload-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.video-upload-button:hover {
+    background-color: #0056b3;
+}
+
+/* Uploaded video preview */
+.video-preview {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.video-preview video {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Message or error handling */
+.video-upload-message {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #28a745; /* Success message color */
+}
+
+.video-upload-error {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #dc3545; /* Error message color */
+}
