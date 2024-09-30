@@ -1,2 +1,3 @@
 ./node-modules
 my-app/backend/.env
+my-app/utils/.env
