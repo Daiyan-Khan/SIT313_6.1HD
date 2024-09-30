@@ -22,6 +22,8 @@ const Signup = () => {
         confirmPassword: ''
     });
     const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State for confirm password visibility
     const navigate = useNavigate(); // Hook to programmatically navigate
 
     /**
@@ -70,11 +72,43 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password:</label>
-                    <Input id="password" name="password" type="password" placeholder="Password" onChange={handleChange} value={formData.password} />
+                    <div className="password-input">
+                        <Input
+                            id="password"
+                            name="password"
+                            type={showPassword ? 'text' : 'password'} // Toggle between text and password
+                            placeholder="Password"
+                            onChange={handleChange}
+                            value={formData.password}
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+                            className="toggle-password"
+                        >
+                            {showPassword ? 'Hide' : 'Show'}
+                        </button>
+                    </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="confirmPassword">Confirm Password:</label>
-                    <Input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password" onChange={handleChange} value={formData.confirmPassword} />
+                    <div className="password-input">
+                        <Input
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            type={showConfirmPassword ? 'text' : 'password'} // Toggle between text and password
+                            placeholder="Confirm Password"
+                            onChange={handleChange}
+                            value={formData.confirmPassword}
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)} // Toggle confirm password visibility
+                            className="toggle-password"
+                        >
+                            {showConfirmPassword ? 'Hide' : 'Show'}
+                        </button>
+                    </div>
                 </div>
                 <Button type="submit" text="Create" />
                 <Link to="/login">

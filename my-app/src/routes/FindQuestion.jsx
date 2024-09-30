@@ -57,11 +57,8 @@ const FindQuestion = () => {
 
     return (
         <div className="find-question-page">
-
             <h1>Find Questions</h1>
-<Link to="/">
-                <Button text="Home" />
-            </Link>
+
             <div className="filter-section">
                 <input
                     type="text"
@@ -146,7 +143,9 @@ const FindQuestion = () => {
                 </Droppable>
             </DragDropContext>
 
-            
+            <Link to="/">
+                <Button text="Home" />
+            </Link>
         </div>
     );
 };
