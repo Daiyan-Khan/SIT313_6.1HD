@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { signInWithEmail } from '../utils/firebase'; // Firebase authentication utility
 import Input from '../Input';
 import Button from '../Button';
+import TwoFactorAuth from './2fa'; // Import the updated 2FA component
 import '../css/Login.css'; // Import the CSS file
 
 /**
@@ -10,14 +11,14 @@ import '../css/Login.css'; // Import the CSS file
  * It allows users to log in using their email and password.
  */
 const Login = () => {
-    // State to store form data (email and password) and error messages
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
     const [error, setError] = useState('');
+    const [is2FA, setIs2FA] = useState(false); // State to toggle 2FA input
+    const [token, setToken] = useState(''); // State to store authentication token
 
-    // useNavigate hook for programmatic navigation
     const navigate = useNavigate();
 
     /**
@@ -26,7 +27,6 @@ const Login = () => {
      */
     const handleChange = (event) => {
         const { name, value } = event.target;
-        // Update the form data state
         setFormData((prevData) => ({
             ...prevData,
             [name]: value
@@ -40,37 +40,44 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
         try {
-            // Attempt to sign in with the provided email and password
-            const token = await signInWithEmail(formData.email, formData.password); // Assuming this function returns a token
-            localStorage.setItem('authToken', token); // Store the token in localStorage
-            localStorage.setItem('userEmail', formData.email); // Save the user's email
-            navigate('/'); // Redirect to the home page after successful login
+            const authToken = await signInWithEmail(formData.email, formData.password); // Sign in and get token
+            localStorage.setItem('authToken', authToken); // Store the token
+            setToken(authToken); // Store the token in state for 2FA
+            setIs2FA(true); // Switch to 2FA input form
+            setError(''); // Clear any previous error messages
         } catch (error) {
-            // Set error message if login fails
-            setError(error.message); // Display the error message to the user
+            setError(error.message); // Set error message if login fails
         }
+    };
+
+    /**
+     * Handle successful verification of 2FA code.
+     */
+    const handle2FASuccess = () => {
+        console.log('successful');
+        alert('Signed in successfully!'); // Notify user of successful login
+        navigate('/'); // Redirect to the home page
     };
 
     return (
         <div className='login'>
             <div className='signup-link'>
-                {/* Button to navigate to the sign-up page */}
-                <Button className ='signup-button' onClick={() => navigate('/signup')} text="Sign Up" />
+                <Button className='signup-button' onClick={() => navigate('/signup')} text="Sign Up" />
             </div>
             <br />
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                {/* Input fields for email and password */}
-                <Input name="email" type="email" placeholder="Email" onChange={handleChange} value={formData.email} />
-                <Input name="password" type="password" placeholder="Password" onChange={handleChange} value={formData.password} />
-                {/* Submit button for logging in */}
-                <Button type="submit" text="Log In" />
-                {/* Link to navigate back to home */}
-                <Link to='/'>
-                    <Button text={'Home'} />
-                </Link>
-            </form>
-            {/* Display error message if present */}
+            <h2>{is2FA ? 'Two-Factor Authentication' : 'Login'}</h2>
+            {!is2FA ? (
+                <form onSubmit={handleSubmit}>
+                    <Input name="email" type="email" placeholder="Email" onChange={handleChange} value={formData.email} />
+                    <Input name="password" type="password" placeholder="Password" onChange={handleChange} value={formData.password} />
+                    <Button type="submit" text="Log In" />
+                </form>
+            ) : (
+                <TwoFactorAuth email={formData.email} onSuccess={handle2FASuccess} />
+            )}
+            <Link to='/' className='home-link'>
+                <Button text={'Home'} />
+            </Link>
             {error && <p className='error-message'>{error}</p>}
         </div>
     );

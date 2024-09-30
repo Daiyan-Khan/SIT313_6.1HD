@@ -4,6 +4,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthPro
 import { getAnalytics } from 'firebase/analytics';
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { getStorage } from 'firebase/storage';
+import axios from "axios";
 import bcrypt from "bcryptjs";
 
 // Your web app's Firebase configuration
